@@ -46,5 +46,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     implementation("androidx.room:room-runtime:2.8.4")
     implementation("androidx.room:room-ktx:2.8.4")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.10.0")
+    implementation("androidx.activity:activity-ktx:1.13.0")
 
 }

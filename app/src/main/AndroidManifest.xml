@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TripPlanner">
         <activity
+            android:name=".TripDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddEditTripActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

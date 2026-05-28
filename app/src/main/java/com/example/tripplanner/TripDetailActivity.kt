@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tripplanner.data.Trip
 import com.example.tripplanner.viewmodel.TripViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 
@@ -23,12 +24,19 @@ class TripDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trip_detail)
 
+        val bottomNav = findViewById<BottomNavigationView>(
+            R.id.bottomNavigation
+        )
+
+        BottomNavHelper.setup(bottomNav, this)
+
         //creating the UI elements
         val tvDestination = findViewById<TextView>(R.id.detailDestination)
         val tvDates = findViewById<TextView>(R.id.detailDates)
         val tvDescription = findViewById<TextView>(R.id.detailDescription)
         val ivQRCode = findViewById<ImageView>(R.id.imageViewQRCode)
         val btnShare = findViewById<Button>(R.id.buttonShareTrip)
+        val btnEdit = findViewById<Button>(R.id.buttonEditTrip)
 
         //taking the id of the trip
         val tripId = intent.getIntExtra("TRIP_ID", -1)
@@ -77,6 +85,21 @@ class TripDetailActivity : AppCompatActivity() {
 
                 val shareIntent = Intent.createChooser(sendIntent, "Share the trip:")
                 startActivity(shareIntent)
+            }
+        }
+
+        btnEdit.setOnClickListener {
+
+            currentTrip?.let { trip ->
+
+                val intent = Intent(
+                    this,
+                    AddEditTripActivity::class.java
+                )
+
+                intent.putExtra("TRIP_ID", trip.id)
+
+                startActivity(intent)
             }
         }
     }

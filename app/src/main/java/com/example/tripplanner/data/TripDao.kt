@@ -2,6 +2,7 @@ package com.example.tripplanner.data
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
+import androidx.room.Update
 
 @Dao
 interface TripDao {
@@ -15,7 +16,7 @@ interface TripDao {
 
     //update trip
     @Update
-    suspend fun updateTrip(trip: Trip)
+    suspend fun update(trip: Trip)
 
     //delete trip
     @Delete

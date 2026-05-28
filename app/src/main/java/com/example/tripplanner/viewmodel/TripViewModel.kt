@@ -32,7 +32,7 @@ class TripViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     //update
-    fun update(trip: Trip) = viewModelScope.launch(Dispatchers.IO) {
+    fun update(trip: Trip) = viewModelScope.launch {
         repository.update(trip)
     }
 

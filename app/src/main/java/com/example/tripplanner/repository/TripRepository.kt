@@ -16,7 +16,7 @@ class TripRepository(private val tripDao: TripDao) {
 
     //updating
     suspend fun update(trip: Trip) {
-        tripDao.updateTrip(trip)
+        tripDao.update(trip)
     }
 
     //deleting

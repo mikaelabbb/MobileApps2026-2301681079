@@ -6,4 +6,17 @@
     </style>
 
     <style name="Theme.TripPlanner" parent="Base.Theme.TripPlanner" />
+
+    <style name="Theme.TripPlanner.Splash" parent="Theme.SplashScreen">
+
+        <!-- background -->
+        <item name="windowSplashScreenBackground">@color/black</item>
+
+        <!-- icon -->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+
+        <!-- duration -->
+        <item name="postSplashScreenTheme">@style/Theme.TripPlanner</item>
+
+    </style>
 </resources>

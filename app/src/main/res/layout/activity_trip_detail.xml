@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
 <androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
     android:background="?android:attr/colorBackground">
 
     <LinearLayout
@@ -16,16 +23,15 @@
             android:id="@+id/detailDestination"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Дестинация"
+            android:text="Destination"
             android:textSize="32sp"
-            android:textStyle="bold"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/detailDates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Дата: 01.01.2025 - 05.01.2025"
+            android:text="Date: 01.01.2025 - 05.01.2025"
             android:textSize="16sp"
             android:layout_marginTop="8dp"
             android:textColor="?android:attr/textColorSecondary" />
@@ -38,7 +44,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Описание:"
+            android:text="Description:"
             android:textStyle="bold"
             android:textSize="18sp" />
 
@@ -46,7 +52,7 @@
             android:id="@+id/detailDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Тук ще се появи описанието на вашето пътуване..."
+            android:text="Here will be the description of your trip..."
             android:textSize="16sp"
             android:layout_marginTop="8dp" />
 
@@ -57,7 +63,7 @@
             android:layout_marginTop="32dp"
             app:cardCornerRadius="16dp"
             app:strokeWidth="1dp"
-            app:strokeColor="?android:attr/dividerVertical">
+            app:strokeColor="@color/black">
 
             <ImageView
                 android:id="@+id/imageViewQRCode"
@@ -66,24 +72,44 @@
                 android:scaleType="fitCenter"
                 android:padding="16dp"
                 android:src="@android:drawable/ic_menu_camera" />
+
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="QR код за споделяне"
+            android:text="QR for sharing"
             android:textSize="12sp"
             android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/buttonEditTrip"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Edit Trip"
+            app:icon="@android:drawable/ic_menu_edit" />
 
         <Button
             android:id="@+id/buttonShareTrip"
             style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Сподели с приятели"
+            android:layout_marginTop="16dp"
+            android:text="Share with friends"
             app:icon="@android:drawable/ic_menu_share" />
 
     </LinearLayout>
+
 </androidx.core.widget.NestedScrollView>
+
+<com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/bottomNavigation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/windowBackground"
+    app:menu="@menu/bottom_nav_menu" />
+
+</LinearLayout>

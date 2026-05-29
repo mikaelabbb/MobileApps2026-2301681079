@@ -48,4 +48,6 @@
     <string name="delete_dialog_cancel">Отказ</string>
     <string name="btn_scan_qr">Сканирай QR код</string>
     <string name="error_invalid_qr">Невалиден формат на QR кода за TripPlanner!</string>
+    <string name="create_trip_title">Създай ново пътуване</string>
+    <string name="create_trip_subtitle">Попълни данните или сканирай QR код за автоматично въвеждане</string>
 </resources>

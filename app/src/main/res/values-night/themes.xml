@@ -4,4 +4,17 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <style name="Theme.TripPlanner.Splash" parent="Theme.SplashScreen">
+
+        <!-- background -->
+        <item name="windowSplashScreenBackground">@color/black</item>
+
+        <!-- icon -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon_resizable</item>
+
+        <!-- duration -->
+        <item name="postSplashScreenTheme">@style/Theme.TripPlanner</item>
+
+    </style>
 </resources>

@@ -7,12 +7,19 @@
     android:layout_marginHorizontal="12dp"
     android:layout_marginVertical="6dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="2dp">
+    app:cardElevation="4dp"
+
+    app:strokeWidth="0dp"
+
+    android:background="@drawable/card_gradient_bg"
+    app:cardBackgroundColor="@android:color/transparent">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="16dp"
+
+        android:background="@drawable/card_gradient_bg">
 
         <TextView
             android:id="@+id/textViewDestination"
@@ -21,7 +28,7 @@
             android:text="@string/destination_card_title"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="?android:attr/textColorPrimary"/>
+            android:textColor="@android:color/white"/>
 
         <TextView
             android:id="@+id/textViewDates"
@@ -31,7 +38,7 @@
             android:layout_marginTop="4dp"
             android:text="@string/destination_card_date"
             android:textSize="14sp"
-            android:textColor="?android:attr/textColorSecondary"/>
+            android:textColor="#E0E0E0"/>
 
         <ImageButton
             android:id="@+id/buttonDelete"
@@ -41,7 +48,8 @@
             android:layout_centerVertical="true"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@android:drawable/ic_menu_delete"
-            android:contentDescription="@string/delete_btn_desc" />
+            android:contentDescription="@string/delete_btn_desc"
+            app:tint="@android:color/white" />
 
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -13,7 +13,7 @@
         <item name="windowSplashScreenBackground">@color/black</item>
 
         <!-- icon -->
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon_resizable</item>
 
         <!-- duration -->
         <item name="postSplashScreenTheme">@style/Theme.TripPlanner</item>

@@ -4,15 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tripplanner.data.Trip
 import com.example.tripplanner.viewmodel.TripViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 
@@ -65,13 +67,25 @@ class TripDetailActivity : AppCompatActivity() {
                         val bitmap: Bitmap = barcodeEncoder.encodeBitmap(qrData, BarcodeFormat.QR_CODE, 400, 400)
                         ivQRCode.setImageBitmap(bitmap)
                     } catch (e: Exception) {
+                        // Модерен Snackbar при проблем с QR кода
+                        Snackbar.make(bottomNav, "Error generating QR Code", Snackbar.LENGTH_LONG)
+                            .setAnchorView(bottomNav)
+                            .setBackgroundTint(getColor(R.color.purple_dark))
+                            .show()
                         e.printStackTrace()
                     }
                 }
             }
         } else {
-            Toast.makeText(this, getString(R.string.error_loading_data), Toast.LENGTH_SHORT).show()
-            finish()
+            // КОРЕКЦИЯ: Snackbar за грешка при зареждане с изчакване преди finish()
+            Snackbar.make(bottomNav, getString(R.string.error_loading_data), Snackbar.LENGTH_SHORT)
+                .setAnchorView(bottomNav)
+                .setBackgroundTint(getColor(R.color.purple_dark))
+                .show()
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                finish()
+            }, 400)
         }
 
         //share intent
@@ -96,16 +110,12 @@ class TripDetailActivity : AppCompatActivity() {
         }
 
         btnEdit.setOnClickListener {
-
             currentTrip?.let { trip ->
-
                 val intent = Intent(
                     this,
                     AddEditTripActivity::class.java
                 )
-
                 intent.putExtra("TRIP_ID", trip.id)
-
                 startActivity(intent)
             }
         }

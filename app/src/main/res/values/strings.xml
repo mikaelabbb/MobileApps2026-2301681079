@@ -47,5 +47,7 @@
     <string name="delete_dialog_cancel">Cancel</string>
     <string name="btn_scan_qr">Scan QR Code</string>
     <string name="error_invalid_qr">Invalid QR code format for TripPlanner!</string>
+    <string name="create_trip_title">Create New Trip</string>
+    <string name="create_trip_subtitle">Fill details or scan a QR code to auto-fill</string>
 
 </resources>

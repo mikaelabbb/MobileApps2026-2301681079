@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -44,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         //bottom nav setup
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         BottomNavHelper.setup(bottomNav, this)
-        bottomNav.selectedItemId = R.id.nav_trips
+        bottomNav.selectedItemId = R.id.nav_all_trips
 
         //recycler view setup
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewTrips)
@@ -74,9 +76,21 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // database observer
+        //finding the textview for the empty list
+        val emptyText = findViewById<TextView>(R.id.emptyText)
+
+        //observer for the database
         tripViewModel.allTrips.observe(this) { trips ->
             adapter.submitList(trips)
+
+            //checks if there are any trips
+            if (trips.isEmpty()) {
+                emptyText.visibility = View.VISIBLE    //shows the text
+                recyclerView.visibility = View.GONE   //hides the list
+            } else {
+                emptyText.visibility = View.GONE      //hides the text
+                recyclerView.visibility = View.VISIBLE //shows the list
+            }
         }
     }
 }

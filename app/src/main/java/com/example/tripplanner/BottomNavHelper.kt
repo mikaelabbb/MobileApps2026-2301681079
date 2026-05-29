@@ -12,7 +12,7 @@ object BottomNavHelper {
 
             when (it.itemId) {
 
-                R.id.nav_trips -> {
+                R.id.nav_all_trips -> {
 
                     if (activity !is MainActivity) {
                         activity.startActivity(
@@ -23,7 +23,7 @@ object BottomNavHelper {
                     true
                 }
 
-                R.id.nav_add -> {
+                R.id.nav_new_trip -> {
 
                     if (activity !is AddEditTripActivity) {
                         activity.startActivity(

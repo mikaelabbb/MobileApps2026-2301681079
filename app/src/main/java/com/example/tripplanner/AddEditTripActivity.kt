@@ -2,14 +2,16 @@ package com.example.tripplanner
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Button
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tripplanner.data.Trip
 import com.example.tripplanner.viewmodel.TripViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -46,8 +48,7 @@ class AddEditTripActivity : AppCompatActivity() {
         )
 
         BottomNavHelper.setup(bottomNav, this)
-
-        bottomNav.selectedItemId = R.id.nav_add
+        bottomNav.selectedItemId = R.id.nav_new_trip
 
         //finding the UI files
         val etDestination = findViewById<TextInputEditText>(R.id.editTextDestination)
@@ -89,21 +90,27 @@ class AddEditTripActivity : AppCompatActivity() {
             val endDate = etEndDate.text.toString().trim()
             val description = etDescription.text.toString().trim()
 
-            //check for empty fields
+            //checking for empty fields
             if (destination.isEmpty() || startDate.isEmpty() || endDate.isEmpty()) {
-                Toast.makeText(this, getString(R.string.error_fill_fields), Toast.LENGTH_SHORT).show()
+                Snackbar.make(btnSave, getString(R.string.error_fill_fields), Snackbar.LENGTH_SHORT)
+                    .setAnchorView(bottomNav)
+                    .setBackgroundTint(getColor(R.color.purple_dark))
+                    .show()
                 return@setOnClickListener
             }
 
-            //dates validation - end date can not be before start date
+            //validation with snackbar
             val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
             try {
                 val dateStart = dateFormat.parse(startDate)
                 val dateEnd = dateFormat.parse(endDate)
 
                 if (dateStart != null && dateEnd != null && dateEnd.before(dateStart)) {
-                    Toast.makeText(this, getString(R.string.error_invalid_dates), Toast.LENGTH_LONG).show()
-                    return@setOnClickListener // Спира записването
+                    Snackbar.make(btnSave, getString(R.string.error_invalid_dates), Snackbar.LENGTH_LONG)
+                        .setAnchorView(bottomNav)
+                        .setBackgroundTint(getColor(R.color.purple_dark))
+                        .show()
+                    return@setOnClickListener
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -119,18 +126,26 @@ class AddEditTripActivity : AppCompatActivity() {
 
             if (currentTripId != -1) {
                 tripViewModel.update(trip)
-                Toast.makeText(this, getString(R.string.toast_trip_updated), Toast.LENGTH_SHORT).show()
+                Snackbar.make(btnSave, getString(R.string.toast_trip_updated), Snackbar.LENGTH_SHORT)
+                    .setAnchorView(bottomNav)
+                    .setBackgroundTint(getColor(R.color.purple_dark))
+                    .show()
             } else {
                 tripViewModel.insert(trip)
-                Toast.makeText(this, getString(R.string.toast_trip_saved), Toast.LENGTH_SHORT).show()
+                Snackbar.make(btnSave, getString(R.string.toast_trip_saved), Snackbar.LENGTH_SHORT)
+                    .setAnchorView(bottomNav)
+                    .setBackgroundTint(getColor(R.color.purple_dark))
+                    .show()
             }
 
-            finish()
+            //delay so the user can see the message
+            Handler(Looper.getMainLooper()).postDelayed({
+                finish()
+            }, 400)
         }
 
         //edit mode
         if (currentTripId != -1) {
-
             btnSave.text = getString(R.string.btn_update_trip)
 
             tripViewModel.allTrips.observe(this) { trips ->
@@ -147,7 +162,6 @@ class AddEditTripActivity : AppCompatActivity() {
 
         val btnScanQR = findViewById<Button>(R.id.buttonScanQR)
 
-        //hiding the button if the user is in edit mode
         if (currentTripId != -1) {
             btnScanQR.visibility = android.view.View.GONE
         }
@@ -156,20 +170,23 @@ class AddEditTripActivity : AppCompatActivity() {
             val options = ScanOptions().apply {
                 setDesiredBarcodeFormats(ScanOptions.QR_CODE)
                 setPrompt(getString(R.string.btn_scan_qr))
-                setCameraId(0) //using the back camera
+                setCameraId(0)
                 setBeepEnabled(true)
                 setBarcodeImageEnabled(false)
-                setOrientationLocked(true) //locks the screen in portrait mode
+                setOrientationLocked(true)
             }
             barcodeLauncher.launch(options)
         }
     }
 
     private fun parseAndFillTripData(qrText: String) {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         try {
-            Toast.makeText(this, "Read: $qrText", Toast.LENGTH_LONG).show()
+            Snackbar.make(bottomNav, "Read: $qrText", Snackbar.LENGTH_LONG)
+                .setAnchorView(bottomNav)
+                .setBackgroundTint(getColor(R.color.purple_dark))
+                .show()
 
-            //removing empty spaces
             val lines = qrText.lines().map { it.trim() }.filter { it.isNotEmpty() }
 
             var destination = ""
@@ -179,18 +196,15 @@ class AddEditTripActivity : AppCompatActivity() {
 
             for (line in lines) {
                 when {
-                    //looking for destination
                     line.contains("Trip to", ignoreCase = true) || line.contains("Дестинация", ignoreCase = true) -> {
                         destination = line.substringAfter(":").trim()
                     }
-                    //looking for dates
                     line.contains("Dates", ignoreCase = true) || line.contains("Дати", ignoreCase = true) -> {
                         val datesRaw = line.substringAfter(":").trim()
                         val datesSplit = datesRaw.split("-")
                         startDate = datesSplit.getOrNull(0)?.trim() ?: ""
                         endDate = datesSplit.getOrNull(1)?.trim() ?: ""
                     }
-                    //looking for notes
                     line.contains("Notes", ignoreCase = true) || line.contains("Бележки", ignoreCase = true) -> {
                         description = line.substringAfter(":").trim()
                     }
@@ -206,14 +220,16 @@ class AddEditTripActivity : AppCompatActivity() {
                 description = lines[2].substringAfter(":").trim()
             }
 
-            //the data goes in the fields
             findViewById<TextInputEditText>(R.id.editTextDestination).setText(destination)
             findViewById<TextInputEditText>(R.id.editTextStartDate).setText(startDate)
             findViewById<TextInputEditText>(R.id.editTextEndDate).setText(endDate)
             findViewById<TextInputEditText>(R.id.editTextDescription).setText(description)
 
         } catch (e: Exception) {
-            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+            Snackbar.make(bottomNav, "Error: ${e.message}", Snackbar.LENGTH_LONG)
+                .setAnchorView(bottomNav)
+                .setBackgroundTint(getColor(R.color.purple_dark))
+                .show()
             e.printStackTrace()
         }
     }

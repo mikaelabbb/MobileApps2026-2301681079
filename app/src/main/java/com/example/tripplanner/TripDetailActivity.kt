@@ -1,5 +1,6 @@
 package com.example.tripplanner
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -19,6 +20,10 @@ class TripDetailActivity : AppCompatActivity() {
 
     private val tripViewModel: TripViewModel by viewModels()
     private var currentTrip: Trip? = null
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applySettings(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +53,14 @@ class TripDetailActivity : AppCompatActivity() {
 
                 currentTrip?.let { trip ->
                     tvDestination.text = trip.destination
-                    tvDates.text = "Duration: ${trip.startDate} - ${trip.endDate}"
+                    tvDates.text = getString(R.string.duration_label, trip.startDate, trip.endDate)
                     tvDescription.text = trip.description
 
                     //generating a QR code
                     try {
-                        val qrData = "Trip to: ${trip.destination}\nDates: ${trip.startDate}-${trip.endDate}\nNotes: ${trip.description}"
+                        val qrData = "${getString(R.string.qr_destination, trip.destination)}\n" +
+                                "${getString(R.string.qr_dates, trip.startDate, trip.endDate)}\n" +
+                                getString(R.string.qr_notes, trip.description)
                         val barcodeEncoder = BarcodeEncoder()
                         val bitmap: Bitmap = barcodeEncoder.encodeBitmap(qrData, BarcodeFormat.QR_CODE, 400, 400)
                         ivQRCode.setImageBitmap(bitmap)
@@ -63,7 +70,7 @@ class TripDetailActivity : AppCompatActivity() {
                 }
             }
         } else {
-            Toast.makeText(this, "Error loading the data!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.error_loading_data), Toast.LENGTH_SHORT).show()
             finish()
         }
 
@@ -71,10 +78,10 @@ class TripDetailActivity : AppCompatActivity() {
         btnShare.setOnClickListener {
             currentTrip?.let { trip ->
                 val shareText = """
-                    Planned a new trip!
-                    Destination: ${trip.destination}
-                    Date: ${trip.startDate} - ${trip.endDate}
-                    Notes: ${trip.description}
+                    ${getString(R.string.share_headline)}
+                    ${getString(R.string.share_destination, trip.destination)}
+                    ${getString(R.string.share_date, trip.startDate, trip.endDate)}
+                    ${getString(R.string.share_notes, trip.description)}
                 """.trimIndent()
 
                 val sendIntent = Intent().apply {
@@ -83,7 +90,7 @@ class TripDetailActivity : AppCompatActivity() {
                     type = "text/plain"
                 }
 
-                val shareIntent = Intent.createChooser(sendIntent, "Share the trip:")
+                val shareIntent = Intent.createChooser(sendIntent, getString(R.string.share_title))
                 startActivity(shareIntent)
             }
         }

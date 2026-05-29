@@ -21,7 +21,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Destination"
+                android:hint="@string/destination_hint"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_marginBottom="12dp">
 
@@ -35,7 +35,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Start Date"
+                android:hint="@string/start_date_hint"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_marginBottom="12dp">
 
@@ -51,7 +51,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="End Date"
+                android:hint="@string/end_date_hint"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_marginBottom="12dp">
 
@@ -67,7 +67,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Notes / Description"
+                android:hint="@string/notes_hint"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_marginBottom="24dp">
 
@@ -83,8 +83,17 @@
                 android:id="@+id/buttonSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Save Trip"
+                android:text="@string/save_trip_btn"
                 style="@style/Widget.Material3.Button" />
+
+            <Button
+                android:id="@+id/buttonScanQR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/btn_scan_qr"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                app:icon="@android:drawable/ic_menu_camera" />
 
         </LinearLayout>
 

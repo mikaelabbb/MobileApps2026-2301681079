@@ -23,7 +23,7 @@ android:orientation="vertical">
             android:id="@+id/detailDestination"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Destination"
+            android:text="@string/destination_title"
             android:textSize="32sp"
             android:textStyle="bold" />
 
@@ -31,7 +31,7 @@ android:orientation="vertical">
             android:id="@+id/detailDates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date: 01.01.2025 - 05.01.2025"
+            android:text="@string/date_details"
             android:textSize="16sp"
             android:layout_marginTop="8dp"
             android:textColor="?android:attr/textColorSecondary" />
@@ -44,7 +44,7 @@ android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Description:"
+            android:text="@string/description_title"
             android:textStyle="bold"
             android:textSize="18sp" />
 
@@ -52,7 +52,7 @@ android:orientation="vertical">
             android:id="@+id/detailDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Here will be the description of your trip..."
+            android:text="@string/description_text"
             android:textSize="16sp"
             android:layout_marginTop="8dp" />
 
@@ -79,7 +79,7 @@ android:orientation="vertical">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="QR for sharing"
+            android:text="@string/QR_text"
             android:textSize="12sp"
             android:layout_marginTop="8dp" />
 
@@ -89,7 +89,7 @@ android:orientation="vertical">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Edit Trip"
+            android:text="@string/edit_btn"
             app:icon="@android:drawable/ic_menu_edit" />
 
         <Button
@@ -98,7 +98,7 @@ android:orientation="vertical">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Share with friends"
+            android:text="@string/share_btn"
             app:icon="@android:drawable/ic_menu_share" />
 
     </LinearLayout>

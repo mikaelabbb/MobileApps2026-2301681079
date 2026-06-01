@@ -26,7 +26,7 @@ class TripViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: TripRepository
 
-    //LiveData, list for all of the trips
+    //LiveData, list for all the trips
     val allTrips: LiveData<List<Trip>>
 
     init {
@@ -58,14 +58,14 @@ class TripViewModel(application: Application) : AndroidViewModel(application) {
 
 Проектът е разработен съобразно съвременните практики за Android разработка и следва принципите на Material Design 3 за изграждане на модерен, последователен и достъпен потребителски интерфейс.
 
-| Технология / Библиотека | Версия           | Предназначение |
-|-------------------------|------------------|----------------|
-| Kotlin | 1.9.24           | Основен език за разработка |
-| Min SDK | 24 (Android 7.0) | Минимално поддържана версия на Android |
-| Target SDK | 34 (Android 14)  | Последна стабилна таргетирана версия |
-| Room Database | 2.6.1            | Локално съхранение и управление на данни |
-| ZXing Embedded | 4.3.0            | Сканиране и генериране на QR кодове |
-| Material Components | 1.11.0           | Material 3 компоненти, теми и диалози |
+| Технология / Библиотека | Версия           | Предназначение                           |
+|-------------------------|------------------|------------------------------------------|
+| Kotlin                  | 1.9.24           | Основен език за разработка               |
+| Min SDK                 | 24 (Android 7.0) | Минимално поддържана версия на Android   |
+| Target SDK              | 34 (Android 14)  | Последна стабилна таргетирана версия     |
+| Room Database           | 2.6.1            | Локално съхранение и управление на данни |
+| ZXing Embedded          | 4.3.0            | Сканиране и генериране на QR кодове      |
+| Material Components     | 1.11.0           | Material 3 компоненти, теми и диалози    |
 
 ---
 
@@ -114,7 +114,7 @@ class TripViewModel(application: Application) : AndroidViewModel(application) {
 ### 1. Клониране на хранилището
 
 ```bash
-git clone https://github.com/MikaelaBaltova/MobileApps2026-2301681079.git
+git clone https://github.com/mikaelabbb/MobileApps2026-2301681079.git
 ```
 
 ### 2. Отваряне на проекта

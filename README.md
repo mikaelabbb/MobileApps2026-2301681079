@@ -205,3 +205,7 @@ app/
 │   └── activity_trip_detail/
 └── gradle scripts/
 ```
+
+## Готово APK за инсталация
+Директен линк към инсталационния:
+ **[Изтегли от тук: app-release.apk](apk/app-release.apk)** *(Размер: ~5.2 MB)*

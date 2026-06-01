@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -53,22 +54,24 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
-        android:layout_width="0dp"
-        android:layout_height="72dp"
+        android:layout_width="0dp" android:layout_height="72dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_bottom_nav_bg"
         app:elevation="8dp"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="unlabeled"
+
         app:itemIconSize="28dp"
         app:itemPaddingTop="0dp"
         app:itemPaddingBottom="0dp"
         app:itemIconTint="@color/nav_item_tint"
+
         app:itemRippleColor="@android:color/transparent"
         app:itemActiveIndicatorStyle="@null"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
